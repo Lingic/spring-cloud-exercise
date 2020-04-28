@@ -66,12 +66,8 @@
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<scope>provided</scope>
 		</dependency>-->
-<<<<<<< .mine
-
-=======
 
 		<!--测试-->
->>>>>>> .r35
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -83,7 +79,6 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-<<<<<<< .mine
 
 		<dependency>
 			<groupId>com.alibaba</groupId>
@@ -124,9 +119,6 @@
 			<type>pom</type>
 		</dependency>-->
 
-=======
-
-
 		<!--mybatis jar-->
 		<dependency>
 			<groupId>org.mybatis.spring.boot</groupId>
@@ -161,7 +153,6 @@
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
->>>>>>> .r35
 	</dependencies>
 
 	<build>
