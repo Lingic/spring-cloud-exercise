@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rfics.bus.vehical.mapper.VehicalsMapper">
+
+    <resultMap id="BaseResultMap" type="com.rfics.bus.vehical.entity.Vehicals">
+        <id column="veh_no" jdbcType="INTEGER" property="vehNo" />
+        <result column="preview_check_no" jdbcType="VARCHAR" property="previewCheckNo" />
+        <result column="check_time" jdbcType="TIMESTAMP" property="checkTime" />
+        <result column="check_station_no" jdbcType="INTEGER" property="checkStationNo" />
+        <result column="truck_no" jdbcType="VARCHAR" property="truckNo" />
+        <result column="axis_num" jdbcType="VARCHAR" property="axisNum" />
+        <result column="speed" jdbcType="VARCHAR" property="speed" />
+        <result column="total_weight" jdbcType="VARCHAR" property="totalWeight" />
+        <result column="over_limited" jdbcType="VARCHAR" property="overLimited" />
+        <result column="over_rate" jdbcType="VARCHAR" property="overRate" />
+        <result column="weight_limited" jdbcType="VARCHAR" property="weightLimited" />
+        <result column="direction" jdbcType="VARCHAR" property="direction" />
+        <result column="length" jdbcType="VARCHAR" property="length" />
+        <result column="width" jdbcType="VARCHAR" property="width" />
+        <result column="height" jdbcType="VARCHAR" property="height" />
+        <result column="over_length" jdbcType="VARCHAR" property="overLength" />
+        <result column="over_width" jdbcType="VARCHAR" property="overWidth" />
+        <result column="over_height" jdbcType="VARCHAR" property="overHeight" />
+        <result column="org_code" jdbcType="VARCHAR" property="orgCode" />
+        <result column="traffic_direction" jdbcType="VARCHAR" property="trafficDirection" />
+        <result column="check_flag" jdbcType="VARCHAR" property="checkFlag" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+        <result column="remark" jdbcType="VARCHAR" property="remark" />
+    </resultMap>
+
+    <insert id="insert" keyProperty="vehNo" parameterType="com.rfics.bus.vehical.entity.Vehicals" useGeneratedKeys="true">
+      INSERT INTO vehicals (preview_check_no,
+                            check_time,
+                            check_station_no,
+                            truck_no,
+                            axis_num,
+                            speed,
+                            total_weight,
+                            over_limited,
+                            over_rate,
+                            weight_limited,
+                            direction,
+                            length,
+                            width,
+                            height,
+                            over_length,
+                            over_width,
+                            over_height,
+                            org_code,
+                            traffic_direction,
+                            CHECK_FLAG,
+                            CREATE_TIME,
+                            UPDATE_TIME,
+                            REMARK)
+      VALUES  (#{previewCheckNo, jdbcType=VARCHAR},
+                #{checkTime, jdbcType=TIMESTAMP},
+                #{checkStationNo, jdbcType=INTEGER},
+                #{truckNo, jdbcType=VARCHAR},
+                #{axisNum, jdbcType=VARCHAR},
+                #{speed, jdbcType=VARCHAR},
+                #{totalWeight, jdbcType=VARCHAR},
+                #{overLimited, jdbcType=VARCHAR},
+                #{overRate, jdbcType=VARCHAR},
+                #{weightLimited, jdbcType=VARCHAR},
+                #{direction, jdbcType=VARCHAR},
+                #{length, jdbcType=VARCHAR},
+                #{width, jdbcType=VARCHAR},
+                #{height, jdbcType=VARCHAR},
+                #{overLength, jdbcType=VARCHAR},
+                #{overWidth, jdbcType=VARCHAR},
+                #{overHeight, jdbcType=VARCHAR},
+                #{orgCode, jdbcType=VARCHAR},
+                #{trafficDirection, jdbcType=VARCHAR},
+                #{checkFlag, jdbcType=VARCHAR},
+                #{createTime, jdbcType=TIMESTAMP},
+                #{updateTime, jdbcType=TIMESTAMP},
+                #{remark, jdbcType=VARCHAR})
+    </insert>
+
+    <delete id="delete" parameterType="java.lang.Integer">
+        DELETE FROM vehicals WHERE veh_no = #{vehNo, jdbcType=INTEGER}
+    </delete>
+
+    <update id="update" parameterType="com.rfics.bus.vehical.entity.Vehicals">
+        UPDATE vehicals
+        <set>
+            <if test="previewCheckNo != null">
+                preview_check_no = #{previewCheckNo, jdbcType=VARCHAR},
+            </if>
+            <if test="checkTime != null">
+                check_time = #{checkTime, jdbcType=TIMESTAMP},
+            </if>
+            <if test="checkStationNo != null">
+                check_station_no = #{checkStationNo, jdbcType=INTEGER},
+            </if>
+            <if test="truckNo != null">
+                truck_no = #{truckNo, jdbcType=VARCHAR},
+            </if>
+            <if test="axisNum != null">
+                axis_num = #{axisNum, jdbcType=VARCHAR},
+            </if>
+            <if test="speed != null">
+                speed = #{speed, jdbcType=VARCHAR},
+            </if>
+            <if test="totalWeight != null">
+                total_weight = #{totalWeight, jdbcType=VARCHAR},
+            </if>
+            <if test="overLimited != null">
+                over_limited = #{overLimited, jdbcType=VARCHAR},
+            </if>
+            <if test="overRate != null">
+                over_rate = #{overRate, jdbcType=VARCHAR},
+            </if>
+            <if test="weightLimited != null">
+                weight_limited = #{weightLimited, jdbcType=VARCHAR},
+            </if>
+            <if test="direction != null">
+                direction = #{direction, jdbcType=VARCHAR},
+            </if>
+            <if test="length != null">
+                length = #{length, jdbcType=VARCHAR},
+            </if>
+            <if test="width != null">
+                width = #{width, jdbcType=VARCHAR},
+            </if>
+            <if test="height != null">
+                height = #{height, jdbcType=VARCHAR},
+            </if>
+            <if test="overLength != null">
+                over_length = #{overLength, jdbcType=VARCHAR},
+            </if>
+            <if test="overWidth != null">
+                over_width = #{overWidth, jdbcType=VARCHAR},
+            </if>
+            <if test="overHeight != null">
+                over_height = #{overHeight, jdbcType=VARCHAR},
+            </if>
+            <if test="orgCode != null">
+                org_code = #{orgCode, jdbcType=VARCHAR},
+            </if>
+            <if test="trafficDirection != null">
+                traffic_direction = #{trafficDirection, jdbcType=VARCHAR},
+            </if>
+            <if test="checkFlag != null">
+                check_flag = #{checkFlag, jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime, jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                remark = #{remark, jdbcType=VARCHAR},
+            </if>
+        </set>
+        WHERE veh_no = #{vehNo, jdbcType=INTEGER}
+    </update>
+
+    <select id="getAll" resultMap="BaseResultMap">
+        SELECT * FROM vehicals
+    </select>
+
+    <select id="getOne" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        SELECT * FROM vehicals WHERE veh_no = #{vehNo, jdbcType=INTEGER}
+    </select>
+
+    <select id="getByCriteria" parameterType="com.rfics.bus.vehical.entity.Vehicals" resultMap="BaseResultMap">
+        SELECT * FROM vehicals WHERE 1=1
+        <if test="previewCheckNo != null and previewCheckNo != ''">
+            AND preview_check_no LIKE CONCAT('%', #{previewCheckNo, jdbcType=VARCHAR}, '%')
+        </if>
+        <if test="checkTime != null and checkTime != ''">
+            AND check_time = #{checkTime, jdbcType=TIMESTAMP}
+        </if>
+        <if test="checkStationNo != null and checkStationNo != ''">
+            AND check_station_no = #{checkStationNo, jdbcType=INTEGER}
+        </if>
+        <if test="truckNo != null and truckNo != ''">
+            AND truck_no LIKE CONCAT('%', #{truckNo, jdbcType=VARCHAR}, '%')
+        </if>
+        <if test="axisNum != null and axisNum != ''">
+            AND axis_num = #{axisNum, jdbcType=VARCHAR}
+        </if>
+        <if test="speed != null and speed != ''">
+            AND speed = #{speed, jdbcType=VARCHAR}
+        </if>
+        <if test="totalWeight != null and totalWeight != ''">
+            AND total_weight = #{totalWeight, jdbcType=VARCHAR}
+        </if>
+        <if test="overLimited != null and overLimited != ''">
+            AND over_limited = #{overLimited, jdbcType=VARCHAR}
+        </if>
+        <if test="overRate != null and overRate != ''">
+            AND over_rate = #{overRate, jdbcType=VARCHAR}
+        </if>
+        <if test="weightLimited != null and weightLimited != ''">
+            AND weight_limited = #{weightLimited, jdbcType=VARCHAR}
+        </if>
+        <if test="direction != null and direction != ''">
+            AND direction = #{direction, jdbcType=VARCHAR}
+        </if>
+        <if test="length != null and length != ''">
+            AND length = #{length, jdbcType=VARCHAR}
+        </if>
+        <if test="width != null and width != ''">
+            AND width = #{width, jdbcType=VARCHAR}
+        </if>
+        <if test="height != null and height != ''">
+            AND height = #{height, jdbcType=VARCHAR}
+        </if>
+        <if test="overLength != null and overLength != ''">
+            AND over_length = #{overLength, jdbcType=VARCHAR}
+        </if>
+        <if test="overWidth != null and overWidth != ''">
+            AND over_width = #{overWidth, jdbcType=VARCHAR}
+        </if>
+        <if test="overHeight != null and overHeight != ''">
+            AND over_height = #{overHeight, jdbcType=VARCHAR}
+        </if>
+        <if test="orgCode != null and orgCode != ''">
+            AND org_code = #{orgCode, jdbcType=VARCHAR}
+        </if>
+        <if test="trafficDirection != null and trafficDirection != ''">
+            AND traffic_direction = #{trafficDirection, jdbcType=VARCHAR}
+        </if>
+        <if test="checkFlag != null and checkFlag != ''">
+            AND check_flag = #{checkFlag, jdbcType=VARCHAR}
+        </if>
+        <if test="createTime != null and createTime != ''">
+            AND create_time = #{createTime, jdbcType=TIMESTAMP}
+        </if>
+        <if test="updateTime != null and updateTime != ''">
+            AND update_time = #{updateTime, jdbcType=TIMESTAMP}
+        </if>
+        <if test="remark != null and remark != ''">
+            AND remark LIKE CONCAT('%', #{remark, jdbcType=VARCHAR}, '%')
+        </if>
+    </select>
+
+</mapper>

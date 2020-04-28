@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.project.rfics.managerment.OrgansMapper" >
+  <resultMap id="BaseResultMap" type="com.project.rfics.managerment.Organs" >
+    <id column="organ_no" property="organNo" jdbcType="INTEGER" />
+    <result column="organ_name" property="organName" jdbcType="VARCHAR" />
+    <result column="parent_no" property="parentNo" jdbcType="INTEGER" />
+    <result column="organ_desc" property="organDesc" jdbcType="VARCHAR" />
+    <result column="check_flag" property="checkFlag" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    organ_no, organ_name, parent_no, organ_desc, check_flag, create_time, update_time, 
+    remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from organs
+    where organ_no = #{organNo,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from organs
+    where organ_no = #{organNo,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.project.rfics.managerment.Organs" useGeneratedKeys="true" keyProperty="organNo" >
+    insert into organs (organ_name, parent_no, organ_desc, 
+      check_flag, create_time, update_time, 
+      remark)
+    values (#{organName,jdbcType=VARCHAR}, #{parentNo,jdbcType=INTEGER}, #{organDesc,jdbcType=VARCHAR}, 
+      #{checkFlag,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.project.rfics.managerment.Organs" useGeneratedKeys="true" keyProperty="organNo" >
+    insert into organs
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="organName != null" >
+        organ_name,
+      </if>
+      <if test="parentNo != null" >
+        parent_no,
+      </if>
+      <if test="organDesc != null" >
+        organ_desc,
+      </if>
+      <if test="checkFlag != null" >
+        check_flag,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="organName != null" >
+        #{organName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentNo != null" >
+        #{parentNo,jdbcType=INTEGER},
+      </if>
+      <if test="organDesc != null" >
+        #{organDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="checkFlag != null" >
+        #{checkFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.project.rfics.managerment.Organs" >
+    update organs
+    <set >
+      <if test="organName != null" >
+        organ_name = #{organName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentNo != null" >
+        parent_no = #{parentNo,jdbcType=INTEGER},
+      </if>
+      <if test="organDesc != null" >
+        organ_desc = #{organDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="checkFlag != null" >
+        check_flag = #{checkFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where organ_no = #{organNo,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.project.rfics.managerment.Organs" >
+    update organs
+    set organ_name = #{organName,jdbcType=VARCHAR},
+      parent_no = #{parentNo,jdbcType=INTEGER},
+      organ_desc = #{organDesc,jdbcType=VARCHAR},
+      check_flag = #{checkFlag,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR}
+    where organ_no = #{organNo,jdbcType=INTEGER}
+  </update>
+</mapper>

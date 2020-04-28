@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rfics.bus.user.mapper.UsersMapper">
+
+    <resultMap id="BaseResultMap" type="com.rfics.bus.user.entity.Users">
+        <id column="user_no" jdbcType="INTEGER" property="userNo" />
+        <id column="organ_no" jdbcType="INTEGER" property="organNo" />
+        <id column="role_no" jdbcType="INTEGER" property="roleNo" />
+        <result column="user_name" jdbcType="VARCHAR" property="userName" />
+        <result column="login_user" jdbcType="VARCHAR" property="loginUser" />
+        <result column="login_pwd" jdbcType="VARCHAR" property="loginPwd" />
+        <result column="check_flag" jdbcType="VARCHAR" property="checkFlag" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+        <result column="remark" jdbcType="VARCHAR" property="remark" />
+    </resultMap>
+
+    <insert id="insert" parameterType="com.rfics.bus.user.entity.Users">
+      INSERT INTO USERS (user_no,
+                            organ_no,
+                            role_no,
+                            user_name,
+                            login_user,
+                            login_pwd,
+                            CHECK_FLAG,
+                            CREATE_TIME,
+                            UPDATE_TIME,
+                            REMARK)
+      VALUES  (#{userNo, jdbcType=INTEGER},
+                #{organNo, jdbcType=INTEGER},
+                #{roleNo, jdbcType=INTEGER},
+                #{userName, jdbcType=VARCHAR},
+                #{loginUser, jdbcType=VARCHAR},
+                #{loginPwd, jdbcType=VARCHAR},
+                #{checkFlag, jdbcType=VARCHAR},
+                #{createTime, jdbcType=TIMESTAMP},
+                #{updateTime, jdbcType=TIMESTAMP},
+                #{remark, jdbcType=VARCHAR})
+    </insert>
+
+    <delete id="delete" parameterType="java.lang.Integer">
+        DELETE FROM USERS WHERE user_no = #{userNo, jdbcType=INTEGER}
+    </delete>
+
+    <update id="update" parameterType="com.rfics.bus.user.entity.Users">
+        UPDATE USERS
+        <set>
+            <if test="organNo != null">
+                organ_no = #{organNo, jdbcType=INTEGER},
+            </if>
+            <if test="roleNo != null">
+                role_no = #{roleNo, jdbcType=INTEGER},
+            </if>
+            <if test="userName != null">
+                user_name = #{userName, jdbcType=VARCHAR},
+            </if>
+            <if test="loginUser != null">
+                login_user = #{loginUser, jdbcType=VARCHAR},
+            </if>
+            <if test="loginPwd != null">
+                login_pwd = #{loginPwd, jdbcType=VARCHAR},
+            </if>
+            <if test="checkFlag != null">
+                check_flag = #{checkFlag, jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime, jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                remark = #{remark, jdbcType=VARCHAR},
+            </if>
+        </set>
+        WHERE user_no = #{userNo, jdbcType=INTEGER}
+    </update>
+
+    <select id="getAll" resultMap="BaseResultMap">
+        SELECT * FROM USERS
+    </select>
+
+    <select id="getOne" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        SELECT * FROM USERS WHERE user_no = #{userNo, jdbcType=INTEGER}
+    </select>
+
+    <select id="getByCriteria" parameterType="com.rfics.bus.user.entity.Users" resultMap="BaseResultMap">
+        SELECT * FROM USERS WHERE 1=1
+        <if test="userNo != null and userNo != ''">
+            AND user_no = #{userNo, jdbcType=INTEGER}
+        </if>
+        <if test="organNo != null and organNo != ''">
+            AND organ_no = #{organNo, jdbcType=INTEGER}
+        </if>
+        <if test="roleNo != null and roleNo != ''">
+            AND role_no = #{roleNo, jdbcType=INTEGER}
+        </if>
+        <if test="userName != null and userName != ''">
+            AND user_name LIKE CONCAT('%', #{userName, jdbcType=VARCHAR}, '%')
+        </if>
+        <if test="loginUser != null and loginUser != ''">
+            AND login_user LIKE CONCAT('%', #{loginUser, jdbcType=VARCHAR}, '%')
+        </if>
+        <if test="checkFlag != null and checkFlag != ''">
+            AND check_flag = #{checkFlag, jdbcType=VARCHAR}
+        </if>
+        <if test="createTime != null and createTime != ''">
+            AND create_time = #{createTime, jdbcType=TIMESTAMP}
+        </if>
+        <if test="updateTime != null and updateTime != ''">
+            AND update_time = #{updateTime, jdbcType=TIMESTAMP}
+        </if>
+        <if test="remark != null and remark != ''">
+            AND remark LIKE CONCAT('%', #{remark, jdbcType=VARCHAR}, '%')
+        </if>
+    </select>
+
+</mapper>

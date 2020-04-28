@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rfics.bus.organ.mapper.OrgansMapper">
+
+    <resultMap id="BaseResultMap" type="com.rfics.bus.organ.entity.Organs">
+        <id column="organ_no" jdbcType="INTEGER" property="organNo" />
+        <result column="organ_name" jdbcType="VARCHAR" property="organName" />
+        <result column="parent_no" jdbcType="INTEGER" property="parentNo" />
+        <result column="organ_desc" jdbcType="VARCHAR" property="organDesc" />
+        <result column="check_flag" jdbcType="VARCHAR" property="checkFlag" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+        <result column="remark" jdbcType="VARCHAR" property="remark" />
+    </resultMap>
+
+    <insert id="insert" parameterType="com.rfics.bus.organ.entity.Organs">
+      INSERT INTO ORGANS (ORGAN_NO,
+                            ORGAN_NAME,
+                            PARENT_NO,
+                            ORGAN_DESC,
+                            CHECK_FLAG,
+                            CREATE_TIME,
+                            UPDATE_TIME,
+                            REMARK)
+      VALUES  (#{organNo, jdbcType=INTEGER},
+                #{organName, jdbcType=VARCHAR},
+                #{parentNo, jdbcType=INTEGER},
+                #{organDesc, jdbcType=VARCHAR},
+                #{checkFlag, jdbcType=VARCHAR},
+                #{createTime, jdbcType=TIMESTAMP},
+                #{updateTime, jdbcType=TIMESTAMP},
+                #{remark, jdbcType=VARCHAR})
+    </insert>
+
+    <delete id="delete" parameterType="java.lang.Integer">
+        DELETE FROM ORGANS WHERE ORGAN_NO = #{organNo, jdbcType=INTEGER}
+    </delete>
+
+    <update id="update" parameterType="com.rfics.bus.organ.entity.Organs">
+        UPDATE ORGANS
+        <set>
+            <if test="organName != null">
+                organ_name = #{organName, jdbcType=VARCHAR},
+            </if>
+            <if test="parentNo != null">
+                parent_no = #{parentNo, jdbcType=INTEGER},
+            </if>
+            <if test="organDesc != null">
+                organ_desc = #{organDesc, jdbcType=VARCHAR},
+            </if>
+            <if test="checkFlag != null">
+                check_flag = #{checkFlag, jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime, jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                remark = #{remark, jdbcType=VARCHAR},
+            </if>
+        </set>
+        WHERE ORGAN_NO = #{organNo, jdbcType=INTEGER}
+    </update>
+
+    <select id="getAll" resultMap="BaseResultMap">
+        SELECT * FROM ORGANS
+    </select>
+
+    <select id="getOne" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        SELECT * FROM ORGANS WHERE ORGAN_NO = #{organNo, jdbcType=INTEGER}
+    </select>
+
+    <select id="getCount" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM ORGANS
+    </select>
+
+    <select id="getByCriteria" parameterType="com.rfics.bus.organ.entity.Organs" resultMap="BaseResultMap">
+        SELECT * FROM ORGANS WHERE 1=1
+        <if test="organNo != null and organNo != ''">
+            AND organ_no = #{organNo, jdbcType=INTEGER}
+        </if>
+        <if test="organName != null and organName != ''">
+            AND organ_name LIKE CONCAT('%', #{organName, jdbcType=VARCHAR}, '%')
+        </if>
+        <if test="parentNo != null and parentNo != ''">
+            AND parent_no = #{parentNo, jdbcType=INTEGER}
+        </if>
+        <if test="organDesc != null and organDesc != ''">
+            AND organ_desc LIKE CONCAT('%', #{organDesc, jdbcType=VARCHAR}, '%')
+        </if>
+        <if test="checkFlag != null and checkFlag != ''">
+            AND check_flag = #{checkFlag, jdbcType=VARCHAR}
+        </if>
+        <if test="createTime != null and createTime != ''">
+            AND create_time = #{createTime, jdbcType=TIMESTAMP}
+        </if>
+        <if test="updateTime != null and updateTime != ''">
+            AND update_time = #{updateTime, jdbcType=TIMESTAMP}
+        </if>
+        <if test="remark != null and remark != ''">
+            AND remark LIKE CONCAT('%', #{remark, jdbcType=VARCHAR}, '%')
+        </if>
+    </select>
+
+</mapper>

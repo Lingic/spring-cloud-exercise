@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.project.rfics.managerment.UsersRolesMapMapper" >
+  <resultMap id="BaseResultMap" type="com.project.rfics.managerment.UsersRolesMap" >
+    <id column="user_role_no" property="userRoleNo" jdbcType="INTEGER" />
+    <result column="role_no" property="roleNo" jdbcType="INTEGER" />
+    <result column="user_no" property="userNo" jdbcType="INTEGER" />
+    <result column="check_flag" property="checkFlag" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    user_role_no, role_no, user_no, check_flag, create_time, update_time, remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from users_roles_map
+    where user_role_no = #{userRoleNo,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from users_roles_map
+    where user_role_no = #{userRoleNo,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.project.rfics.managerment.UsersRolesMap" useGeneratedKeys="true" keyProperty="userRoleNo" >
+    insert into users_roles_map (role_no, user_no, check_flag, 
+      create_time, update_time, remark
+      )
+    values (#{roleNo,jdbcType=INTEGER}, #{userNo,jdbcType=INTEGER}, #{checkFlag,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.project.rfics.managerment.UsersRolesMap" useGeneratedKeys="true" keyProperty="userRoleNo" >
+    insert into users_roles_map
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="roleNo != null" >
+        role_no,
+      </if>
+      <if test="userNo != null" >
+        user_no,
+      </if>
+      <if test="checkFlag != null" >
+        check_flag,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="roleNo != null" >
+        #{roleNo,jdbcType=INTEGER},
+      </if>
+      <if test="userNo != null" >
+        #{userNo,jdbcType=INTEGER},
+      </if>
+      <if test="checkFlag != null" >
+        #{checkFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.project.rfics.managerment.UsersRolesMap" >
+    update users_roles_map
+    <set >
+      <if test="roleNo != null" >
+        role_no = #{roleNo,jdbcType=INTEGER},
+      </if>
+      <if test="userNo != null" >
+        user_no = #{userNo,jdbcType=INTEGER},
+      </if>
+      <if test="checkFlag != null" >
+        check_flag = #{checkFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_role_no = #{userRoleNo,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.project.rfics.managerment.UsersRolesMap" >
+    update users_roles_map
+    set role_no = #{roleNo,jdbcType=INTEGER},
+      user_no = #{userNo,jdbcType=INTEGER},
+      check_flag = #{checkFlag,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR}
+    where user_role_no = #{userRoleNo,jdbcType=INTEGER}
+  </update>
+</mapper>
