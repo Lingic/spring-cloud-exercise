@@ -13,6 +13,6 @@ public class RficsApplication {
 
 	public static void init() {
 		ServerBootstrap bootstrap = new ServerBootstrap();
-		bootstrap.group(b)
+		//bootstrap.group(b)
 	}
 }
